@@ -1,9 +1,8 @@
-package com.geekbrains.spring.web.core.controllers;
+package com.geekbrains.spring.web.cart.controlles;
 
 import com.geekbrains.spring.web.api.dto.StringResponse;
-import com.geekbrains.spring.web.core.dto.Cart;
-import com.geekbrains.spring.web.core.services.CartService;
-import com.geekbrains.spring.web.core.services.ProductsService;
+import com.geekbrains.spring.web.cart.dto.Cart;
+import com.geekbrains.spring.web.cart.services.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,11 +11,11 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class CartsController {
     private final CartService cartService;
-    private final ProductsService productsService;
+
 
     @GetMapping("/{uuid}")
     public Cart getCart(@RequestHeader(required = false) String username, @PathVariable String uuid) {
-        return cartService.getCurrentCart(getCurrentCartUuid(username, uuid));
+        return cartService.getCurrentCart(getCurrentCartUuid(username,uuid));
     }
 
     @GetMapping("/generate")
@@ -52,7 +51,7 @@ public class CartsController {
         );
     }
 
-    private String getCurrentCartUuid(String username, String uuid) {
+    private String getCurrentCartUuid(@RequestHeader(required = false)String username, String uuid) {
         if (username != null) {
             return cartService.getCartUuidFromSuffix(username);
         }

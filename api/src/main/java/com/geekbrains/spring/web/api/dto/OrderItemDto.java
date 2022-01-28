@@ -1,6 +1,5 @@
-package com.geekbrains.spring.web.core.dto;
+package com.geekbrains.spring.web.api.dto;
 
-import com.geekbrains.spring.web.core.entities.Product;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,12 +14,12 @@ public class OrderItemDto {
     private int pricePerProduct;
     private int price;
 
-    public OrderItemDto(Product product) {
-        this.productId = product.getId();
-        this.productTitle = product.getTitle();
+    public OrderItemDto(ProductDto productdto) {
+        this.productId = productdto.getId();
+        this.productTitle = productdto.getTitle();
         this.quantity = 1;
-        this.pricePerProduct = product.getPrice();
-        this.price = product.getPrice();
+        this.pricePerProduct = productdto.getPrice();
+        this.price = productdto.getPrice();
     }
 
     public void changeQuantity(int delta) {
